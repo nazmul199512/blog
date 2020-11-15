@@ -1,119 +1,72 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block container %}
-  <!-- Page Content -->
-  <div class="container">
+    <!-- Page Content -->
+    <div class="container">
 
-    <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">Blog Home Two
-      <small>Subheading</small>
-    </h1>
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">Blog Home
 
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a href="index.html">Home</a>
-      </li>
-      <li class="breadcrumb-item active">Blog Home 2</li>
-    </ol>
+        </h1>
 
-    <!-- Blog Post -->
-    <div class="card mb-4">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-lg-6">
-            <a href="#">
-              <img class="img-fluid rounded" src="http://placehold.it/750x300" alt="">
-            </a>
-          </div>
-          <div class="col-lg-6">
-            <h2 class="card-title">Post Title</h2>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-            <a href="#" class="btn btn-primary">Read More &rarr;</a>
-          </div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Blog Home</li>
+        </ol>
+
+        <!-- Blog Post -->
+
+        {% for data in postdata %}
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <a href="#">
+                                <img class="img-fluid rounded" style="height: 250px; width: 700px" src="{% static 'images.jpg' %}" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-6">
+                            <h2 class="card-title">{{ data.title }}</h2>
+                            <p class="card-text">{{ data.body }}</p>
+                            <a href="{% url 'post:post-details' data.id %}" class="btn btn-primary">Read More &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    Posted on January 1, 2017
+                    <a href="#"></a>
+                </div>
+            </div>
+        {% endfor %}
+
+
+
+        <!-- Pagination -->
+
+        <div class="pagination">
+    <span class="step-links">
+        {% if postdata.has_previous %}
+            <a href="?page=1">&laquo; First</a>
+            <a href="?page={{ postdata.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ postdata.number }} of {{ postdata.paginator.num_pages }}.
+        </span>
+
+        {% if postdata.has_next %}
+            <a href="?page={{ postdata.next_page_number }}">Next</a>
+            <a href="?page={{ postdata.paginator.num_pages }}">Last &raquo;</a>
+        {% endif %}
+    </span>
         </div>
-      </div>
-      <div class="card-footer text-muted">
-        Posted on January 1, 2017 by
-        <a href="#">Start Bootstrap</a>
-      </div>
+
+
     </div>
-
-    <!-- Blog Post -->
-    <div class="card mb-4">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-lg-6">
-            <a href="#">
-              <img class="img-fluid rounded" src="http://placehold.it/750x300" alt="">
-            </a>
-          </div>
-          <div class="col-lg-6">
-            <h2 class="card-title">Post Title</h2>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-            <a href="#" class="btn btn-primary">Read More &rarr;</a>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer text-muted">
-        Posted on January 1, 2017 by
-        <a href="#">Start Bootstrap</a>
-      </div>
-    </div>
-
-    <!-- Blog Post -->
-    <div class="card mb-4">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-lg-6">
-            <a href="#">
-              <img class="img-fluid rounded" src="http://placehold.it/750x300" alt="">
-            </a>
-          </div>
-          <div class="col-lg-6">
-            <h2 class="card-title">Post Title</h2>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-            <a href="#" class="btn btn-primary">Read More &rarr;</a>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer text-muted">
-        Posted on January 1, 2017 by
-        <a href="#">Start Bootstrap</a>
-      </div>
-    </div>
-
-    <!-- Blog Post -->
-    <div class="card mb-4">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-lg-6">
-            <a href="#">
-              <img class="img-fluid rounded" src="http://placehold.it/750x300" alt="">
-            </a>
-          </div>
-          <div class="col-lg-6">
-            <h2 class="card-title">Post Title</h2>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-            <a href="#" class="btn btn-primary">Read More &rarr;</a>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer text-muted">
-        Posted on January 1, 2017 by
-        <a href="#">Start Bootstrap</a>
-      </div>
-    </div>
-
-    <!-- Pagination -->
-    <ul class="pagination justify-content-center mb-4">
-      <li class="page-item">
-        <a class="page-link" href="#">&larr; Older</a>
-      </li>
-      <li class="page-item disabled">
-        <a class="page-link" href="#">Newer &rarr;</a>
-      </li>
-    </ul>
-
-  </div>
-  <!-- /.container -->
+    </br>
+    <!-- /.container -->
 {% endblock container %}
